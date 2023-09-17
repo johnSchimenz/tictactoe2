@@ -22,8 +22,6 @@ const gameSetUp = (() => {
     playerTwoDisplay.textContent = playerTwo.name + " - " + playerTwo.marker;
 
     let roundCounter = 1;
-    const roundDisplay = document.querySelector("#top-center");
-    roundDisplay.textContent = "Round " + roundCounter;
 
     return {
         playerOne,
@@ -64,6 +62,9 @@ function displayCurrentResults(playerOne, playerTwo, roundCounter) {
 
 // playRound module
 const playRound = (() => {
+    const roundDisplay = document.querySelector("#top-center");
+    roundDisplay.textContent = "Round " + gameSetUp.roundCounter;
+    
     // Make cells of tic-tac-toe board clickable
     const cells = document.querySelectorAll("button.cell");
     cells.forEach((cell) => {
@@ -79,15 +80,23 @@ const playRound = (() => {
                 currentPlayer = gameSetUp.playerOne;
                 cell.textContent = currentPlayer.marker;
                 gameSetUp.roundCounter++;
+                roundDisplay.textContent = "Round " + gameSetUp.roundCounter;
             }
             else if (gameSetUp.roundCounter % 2 === 0 && cell.textContent === "") {
                 currentPlayer = gameSetUp.playerTwo;
                 cell.textContent = currentPlayer.marker;
                 gameSetUp.roundCounter++;
+                roundDisplay.textContent = "Round " + gameSetUp.roundCounter;
             }
             else {
                 console.log("doesn't work");
             }
+
+            // Makes sure Round does not display "10"
+            if (gameSetUp.roundCounter === 10) {
+                roundDisplay.textContent = "";
+            };
+
 
             // Change gameBoardArray to reflect the current player's choice
             let idNumber = elementId.slice(4, 5);
