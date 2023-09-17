@@ -17,10 +17,19 @@ const gameSetUp = (() => {
     const playerTwo = PlayerFactory("Bob", "O");
     const roundCounter = 1;
 
+    // Make cells of tic-tac-toe board clickable
+    const cells = document.querySelectorAll("button.cell");
+    cells.forEach((cell) => {
+        cell.addEventListener("click", () => {
+            cell.textContent = "clicked";
+        });
+    });
+
     return {
         playerOne,
         playerTwo,
         roundCounter,
+        cells,
     };
 })();
 
@@ -35,5 +44,5 @@ function playRound() {
         currentPlayer = playerTwo;
     }
 
-    
+
 }
