@@ -14,8 +14,16 @@ const PlayerFactory = (name, marker) => {
 const gameSetUp = (() => {
     // Create players and roundCounter
     const playerOne = PlayerFactory("Abby", "X");
+    const playerOneDisplay = document.querySelector("#top-left");
+    playerOneDisplay.textContent = playerOne.name + " - " + playerOne.marker;
+
     const playerTwo = PlayerFactory("Bob", "O");
+    const playerTwoDisplay = document.querySelector("#top-right");
+    playerTwoDisplay.textContent = playerTwo.name + " - " + playerTwo.marker;
+
     let roundCounter = 1;
+    const roundDisplay = document.querySelector("#top-center");
+    roundDisplay.textContent = "Round " + roundCounter;
 
     return {
         playerOne,
@@ -37,7 +45,6 @@ function checkWinner(player, marker) {
         gameBoardArray[2] === marker && gameBoardArray[4] == marker && gameBoardArray[6] === marker
         ) {
             player.winner = true;
-            console.log(player);
             return player;
         }
 }
