@@ -12,7 +12,7 @@ const PlayerFactory = (name, marker) => {
 
 // gameSetUp module
 const gameSetUp = (() => {
-    // Create players and roundCounter
+    // Creates the two players and roundCounter
     const playerOne = PlayerFactory("Abby", "X");
     const playerOneDisplay = document.querySelector("#top-left");
     playerOneDisplay.textContent = playerOne.name + " - " + playerOne.marker;
@@ -49,19 +49,21 @@ function checkWinner(player, marker) {
 
 // displayCurrentResults
 function displayCurrentResults(playerOne, playerTwo, roundCounter) {
+    const bottomMessageDisplay = document.querySelector("#bottom");
     if (playerOne.winner === true) {
-        console.log(playerOne.name + " is the winner!  Play again?");
+        bottomMessageDisplay.textContent = playerOne.name + " is the winner!  Play again?";
     }
     if (playerTwo.winner === true) {
-        console.log(playerTwo.name + " is the winner!  Play again?");
+        bottomMessageDisplay.textContent = playerTwo.name + " is the winner!  Play again?";
     }
     if (playerOne.winner === false && playerTwo.winner === false && roundCounter >=10) {
-        console.log("Tie game.  Play again?");
+        bottomMessageDisplay.textContent = "Tie game.  Play again?";
     }
 }
 
 // playRound module
 const playRound = (() => {
+    // Creates a display along the top for the round
     const roundDisplay = document.querySelector("#top-center");
     roundDisplay.textContent = "Round " + gameSetUp.roundCounter;
     
@@ -75,28 +77,33 @@ const playRound = (() => {
             // Initialize currentPlayer
             let currentPlayer = "";
 
+            // Initialize bottom message to nothing (will display things based on clicks)
+            const bottomMessageDisplay = document.querySelector("#bottom");
+            bottomMessageDisplay.textContent = "";
+
             // Make cell display current player's marker, add 1 to roundCounter, and check if we have a winner
             if (gameSetUp.roundCounter % 2 === 1 && cell.textContent === "") {
                 currentPlayer = gameSetUp.playerOne;
                 cell.textContent = currentPlayer.marker;
                 gameSetUp.roundCounter++;
                 roundDisplay.textContent = "Round " + gameSetUp.roundCounter;
+                bottomMessageDisplay.textContent = gameSetUp.playerTwo.name + "'s turn";
             }
             else if (gameSetUp.roundCounter % 2 === 0 && cell.textContent === "") {
                 currentPlayer = gameSetUp.playerTwo;
                 cell.textContent = currentPlayer.marker;
                 gameSetUp.roundCounter++;
                 roundDisplay.textContent = "Round " + gameSetUp.roundCounter;
+                bottomMessageDisplay.textContent = gameSetUp.playerOne.name + "'s turn";
             }
             else {
-                console.log("doesn't work");
+                bottomMessageDisplay.textContent = "Can't click on an already chosen spot.  Click an empty spot.";
             }
 
             // Makes sure Round does not display "10"
             if (gameSetUp.roundCounter === 10) {
                 roundDisplay.textContent = "";
             };
-
 
             // Change gameBoardArray to reflect the current player's choice
             let idNumber = elementId.slice(4, 5);
@@ -107,6 +114,16 @@ const playRound = (() => {
 
             // Display what to do next
             displayCurrentResults(gameSetUp.playerOne, gameSetUp.playerTwo, gameSetUp.roundCounter);
+
+            // Makes reset button clickable
+            const resetGameBoard = document.querySelector("#reset");
+            resetGameBoard.addEventListener("click", () => {
+                gameSetUp.roundCounter = 1;
+                gameBoardArray = ["", "", "", "", "", "", "", "", ""];
+                cells.forEach((cell) => {
+                    cell.textContent = "";
+                })
+            })
         });
     });
 })();
