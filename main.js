@@ -23,13 +23,15 @@ const gameSetUp = (() => {
         roundCounter,
     };
 })();
-console.log(gameSetUp.roundCounter);
 
 // Make cells of tic-tac-toe board clickable - not sure if this needs to be in a module or factory
 const cells = document.querySelectorAll("button.cell");
 cells.forEach((cell) => {
     cell.addEventListener("click", () => {
-        let currentMarker = "";
+        // Get clicked cell's id
+        let elementId = cell.getAttribute("id");
+
+        // Make cell display current player's marker and add 1 to roundCounter
         if (gameSetUp.roundCounter % 2 === 1 && cell.textContent === "") {
             cell.textContent = gameSetUp.playerOne.marker;
             gameSetUp.roundCounter++;
@@ -41,6 +43,10 @@ cells.forEach((cell) => {
         else {
             alert("I've already been chosen.  Choose an empty cell");
         }
+
+        // Change gameBoardArray to reflect the current player's choice
+        let idNumber = elementId.slice(4, 5);
+        gameBoardArray[idNumber] = cell.textContent;
     });
 });
 
