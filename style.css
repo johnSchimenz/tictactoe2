@@ -2,10 +2,10 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: (3, 1fr);
+
 }
 .cell {
-    border-style: solid;
+    background-color: lightgray;    border-style: solid;
     border-color: black;
-    background-color: lightgray;
     height: 50px;
 }

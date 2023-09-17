@@ -1,1 +1,6 @@
-console.log("hello world");
+// gameBoard module
+const gameBoard = (() => {
+    gameBoardArray = ["", "", "", "", "", "", "", "", ""];
+    return gameBoardArray
+})();
+
