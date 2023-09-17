@@ -4,8 +4,6 @@
     grid-template-rows: (3, 1fr);
 
 }
-.cell {
-    background-color: lightgray;    border-style: solid;
-    border-color: black;
+button.cell {
     height: 50px;
 }

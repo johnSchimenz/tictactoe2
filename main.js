@@ -12,15 +12,28 @@ const PlayerFactory = (playerName, marker) => {
 
 // gameSetUp module
 const gameSetUp = (() => {
-    // Create players
+    // Create players and roundCounter
     const playerOne = PlayerFactory("Abby", "X");
     const playerTwo = PlayerFactory("Bob", "O");
+    const roundCounter = 1;
 
     return {
         playerOne,
         playerTwo,
+        roundCounter,
     };
 })();
 
-console.log(gameSetUp.playerOne);
-console.log(gameSetUp.playerTwo);
+// playRound function
+function playRound() {
+    // Determine who is the current player
+    const currentPlayer = ""
+    if (roundCounter % 2 === 1) {
+        currentPlayer = playerOne;
+    }
+    if (roundCounter % 2 === 0) {
+        currentPlayer = playerTwo;
+    }
+
+    
+}
