@@ -15,25 +15,32 @@ const gameSetUp = (() => {
     // Create players and roundCounter
     const playerOne = PlayerFactory("Abby", "X");
     const playerTwo = PlayerFactory("Bob", "O");
-    const roundCounter = 1;
-
-    // Make cells of tic-tac-toe board clickable
-    const cells = document.querySelectorAll("button.cell");
-    cells.forEach((cell) => {
-        cell.addEventListener("click", () => {
-            cell.textContent = "clicked";
-        });
-    });
+    let roundCounter = 1;
 
     return {
         playerOne,
         playerTwo,
         roundCounter,
-        cells,
     };
 })();
+console.log(gameSetUp.roundCounter);
 
-// playRound function
+// Make cells of tic-tac-toe board clickable - not sure if this needs to be in a module or factory
+const cells = document.querySelectorAll("button.cell");
+cells.forEach((cell) => {
+    cell.addEventListener("click", () => {
+        let currentMarker = "";
+        if (gameSetUp.roundCounter % 2 === 1) {
+            cell.textContent = gameSetUp.playerOne.marker;
+        }
+        if (gameSetUp.roundCounter % 2 === 0) {
+            cell.textContent = gameSetUp.playerTwo.marker;
+        }
+        // cell.textContent = currentMarker;
+        gameSetUp.roundCounter++;
+    });
+});
+
 function playRound() {
     // Determine who is the current player
     const currentPlayer = ""
