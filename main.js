@@ -30,14 +30,17 @@ const cells = document.querySelectorAll("button.cell");
 cells.forEach((cell) => {
     cell.addEventListener("click", () => {
         let currentMarker = "";
-        if (gameSetUp.roundCounter % 2 === 1) {
+        if (gameSetUp.roundCounter % 2 === 1 && cell.textContent === "") {
             cell.textContent = gameSetUp.playerOne.marker;
+            gameSetUp.roundCounter++;
         }
-        if (gameSetUp.roundCounter % 2 === 0) {
+        else if (gameSetUp.roundCounter % 2 === 0 && cell.textContent === "") {
             cell.textContent = gameSetUp.playerTwo.marker;
+            gameSetUp.roundCounter++;
         }
-        // cell.textContent = currentMarker;
-        gameSetUp.roundCounter++;
+        else {
+            alert("I've already been chosen.  Choose an empty cell");
+        }
     });
 });
 
