@@ -21,6 +21,9 @@ const gameSetUp = (() => {
     const playerTwoDisplay = document.querySelector("#top-right");
     playerTwoDisplay.textContent = playerTwo.name + " - " + playerTwo.marker;
 
+    const bottomMessageDisplay = document.querySelector("#bottom");
+    bottomMessageDisplay.textContent = playerOne.name + "'s turn";
+
     let roundCounter = 1;
 
     return {
@@ -79,7 +82,6 @@ const playRound = (() => {
 
             // Initialize bottom message to nothing (will display things based on clicks)
             const bottomMessageDisplay = document.querySelector("#bottom");
-            bottomMessageDisplay.textContent = "";
 
             // Make cell display current player's marker, add 1 to roundCounter, and check if we have a winner
             if (gameSetUp.roundCounter % 2 === 1 && cell.textContent === "") {
@@ -123,6 +125,7 @@ const playRound = (() => {
                 cells.forEach((cell) => {
                     cell.textContent = "";
                 })
+                bottomMessageDisplay.textContent = gameSetUp.playerOne.name + "'s turn";
             })
         });
     });
