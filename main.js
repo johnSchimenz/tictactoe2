@@ -13,11 +13,17 @@ const PlayerFactory = (name, marker) => {
 // gameSetUp module
 const gameSetUp = (() => {
     // Creates the two players and roundCounter
-    const playerOne = PlayerFactory("Abby", "X");
+    const playerOneName = prompt("Write the name for Player 1: ");
+    const playerOneMarker = "X";
+
+    const playerTwoName = prompt("Write the name for Player 2: ");
+    const playerTwoMarker = "O";
+
+    const playerOne = PlayerFactory(playerOneName, playerOneMarker);
     const playerOneDisplay = document.querySelector("#top-left");
     playerOneDisplay.textContent = playerOne.name + " - " + playerOne.marker;
 
-    const playerTwo = PlayerFactory("Bob", "O");
+    const playerTwo = PlayerFactory(playerTwoName, playerTwoMarker);
     const playerTwoDisplay = document.querySelector("#top-right");
     playerTwoDisplay.textContent = playerTwo.name + " - " + playerTwo.marker;
 
